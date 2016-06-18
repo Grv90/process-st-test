@@ -24,11 +24,18 @@ angular.module('yapp')
                 previewMaxHeight: 200,
                 previewCrop: true,
                 add: function(e, data) {
-                    $("#submit").off('click').on('click', function() {
-                        data.submit();
-                       
-                    $('.message').text("");
-                    });
+
+                    var acceptFileTypes = /\/(mp4|3gpp|x-flv)$/i;
+                    console.log(data);
+                    if (data.originalFiles[0]['type']=="" || data.originalFiles[0]['type'].length  && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+                        $('.message').text("File type not supported");
+                    } else {
+                        $("#submit").off('click').on('click', function() {
+                            data.submit();
+
+                            $('.message').text("");
+                        }); 
+                    }
 
                 },
                 progressall: function(e, data) {
@@ -56,8 +63,8 @@ angular.module('yapp')
 
                 },
                 fail: function(e, data) {
-                  
-                      $('.message').text(data.jqXHR.responseJSON.error);
+
+                    $('.message').text(data.jqXHR.responseJSON.error);
                 }
 
 
