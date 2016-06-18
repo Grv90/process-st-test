@@ -10,6 +10,7 @@
 angular.module('yapp')
     .controller('overviewCtrl', function($scope, $state) {
 
+
         $(function() {
             'use strict';
             $('#fileupload').fileupload({
@@ -25,6 +26,8 @@ angular.module('yapp')
                 add: function(e, data) {
                     $("#submit").off('click').on('click', function() {
                         data.submit();
+                       
+                    $('.message').text("");
                     });
 
                 },
@@ -44,7 +47,7 @@ angular.module('yapp')
                     var response = jQuery.parseJSON(data.jqXHR.responseText);
                     console.log(response);
                     var id = response.hashed_id;
-                    var videoSrc = "http://fast.wistia.com/embed/iframe/" + id + "?version=v1&controlsVisibleOnLoad=true&videoFoam=true&autoPlay=true&playerColor=aae3d8";
+                    var videoSrc = "https://fast.wistia.com/embed/iframe/" + id + "?version=v1&controlsVisibleOnLoad=true&videoFoam=true&autoPlay=true&playerColor=aae3d8";
                     var html = "<div>Video Uploaded Successfully to <i><b> Wistia.</b><i></div>";
                     $('.message').append($(html));
                     $('#iframe_diplayedVideo').attr('src', videoSrc)
